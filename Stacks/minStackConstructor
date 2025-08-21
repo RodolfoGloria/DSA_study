@@ -1,0 +1,50 @@
+class MinStack {
+    private Node top;
+    private int height;
+
+    class Node{
+        int value;
+        Node next;
+        int min;
+
+        Node (int value){
+            this.value = value; 
+            this.min = value;
+        }
+    }
+
+    public MinStack() {
+        top = null;
+        height = 0;
+    }
+    
+    public void push(int val) {
+        Node newTop = new Node(val);
+        if (top == null){
+            top = newTop;
+        } else {
+            newTop.min = Math.min(val, top.min);  // Track minimum
+            newTop.next = top;
+            top = newTop;
+        }
+        height++;
+    }
+    
+    public void pop() {
+        if (top == null) return;
+        Node temp = top.next;
+        top.next = null;
+        top = temp;
+        height--;
+    }
+    
+    public int top() {
+        if (top == null) throw new IllegalStateException("Stack is empty");
+        return top.value;
+    }
+    
+    public int getMin() {
+        if (top == null) throw new IllegalStateException("Stack is empty");
+        return top.min;
+    }
+}
