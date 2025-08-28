@@ -1,0 +1,20 @@
+//Option 1
+
+class Solution {
+    public int partitionString(String s) {
+        Set<Character> currentSubstring = new HashSet<>();
+        int count = 1;
+            for(char c : s.toCharArray()) {
+                if(currentSubstring.contains(c)) {
+                    currentSubstring.clear();  // Clear the set
+                    count++;  // Increment partition count
+                    currentSubstring.add(c);  // Add current char to new substring
+                } else {
+                // Add character to current substring
+                currentSubstring.add(c);
+                }
+            }
+    
+        return count;
+    }
+}
